@@ -9,35 +9,34 @@ function(myproject_setup_dependencies)
   # already been provided to us by a parent project
 
   if(NOT TARGET fmtlib::fmtlib)
-    cpmaddpackage("gh:fmtlib/fmt#9.1.0")
+    CPMFindPackage(
+      NAME fmt
+      VERSION 10.1.1)
   endif()
 
   if(NOT TARGET spdlog::spdlog)
-    cpmaddpackage(
-      NAME
-      spdlog
-      VERSION
-      1.11.0
-      GITHUB_REPOSITORY
-      "gabime/spdlog"
-      OPTIONS
-      "SPDLOG_FMT_EXTERNAL ON")
+    CPMFindPackage(
+      NAME spdlog
+      VERSION 1.12.0
+      OPTIONS "SPDLOG_FMT_EXTERNAL ON")
   endif()
 
   if(NOT TARGET Catch2::Catch2WithMain)
-    cpmaddpackage("gh:catchorg/Catch2@3.3.2")
+    CPMFindPackage(
+      NAME catch2 
+      VERSION 3.3.2)
   endif()
 
   if(NOT TARGET CLI11::CLI11)
-    cpmaddpackage("gh:CLIUtils/CLI11@2.3.2")
+    CPMFindPackage(
+      NAME cli11 
+      VERSION 2.3.2)
   endif()
 
   if(NOT TARGET ftxui::screen)
-    cpmaddpackage("gh:ArthurSonzogni/FTXUI#e23dbc7473654024852ede60e2121276c5aab660")
-  endif()
-
-  if(NOT TARGET tools::tools)
-    cpmaddpackage("gh:lefticus/tools#update_build_system")
+    CPMFindPackage(
+      NAME ftxui
+      VERSION 5.0.0)
   endif()
 
 endfunction()

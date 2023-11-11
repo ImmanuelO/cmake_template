@@ -14,10 +14,13 @@ endif()
 # when compiling with PCH enabled
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Enabling Code Injection to run for conan
+set(CMAKE_PROJECT_TOP_LEVEL_INCLUDES "cmake/conan_provider.cmake")
+
 # Set the project name and language
 project(
   myproject
-  VERSION 0.0.1
+  VERSION 0.0.1.1
   DESCRIPTION ""
   HOMEPAGE_URL "%%myurl%%"
   LANGUAGES CXX C)
@@ -55,7 +58,7 @@ add_library(myproject::myproject_warnings ALIAS myproject_warnings)
 #add_library(myproject::myproject_warnings INTERFACE IMPORTED)
 
 # configure files based on CMake configuration options
-add_subdirectory(configured_files)
+add_subdirectory(config)
 
 # Adding the src:
 add_subdirectory(src)
@@ -79,7 +82,7 @@ if(myproject_BUILD_FUZZ_TESTS)
   if (NOT myproject_ENABLE_ADDRESS_SANITIZER AND NOT myproject_ENABLE_THREAD_SANITIZER)
     message(WARNING "You need asan or tsan enabled for meaningful fuzz testing")
   endif()
-  add_subdirectory(fuzz_test)
+  add_subdirectory(fuzzing)
 
 endif()
 
@@ -88,7 +91,13 @@ endif()
 if(MSVC)
   get_all_installable_targets(all_targets)
   message("all_targets=${all_targets}")
-  set_target_properties(${all_targets} PROPERTIES VS_DEBUGGER_ENVIRONMENT "PATH=$(VC_ExecutablePath_x64);%PATH%")
+  set_target_properties(${all_targets} 
+    PROPERTIES 
+    VS_DEBUGGER_ENVIRONMENT 
+    "PATH=$(VC_ExecutablePath_x64);%PATH%"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 endif()
 
 # set the startup project for the "play" button in MSVC

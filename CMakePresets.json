@@ -10,9 +10,8 @@
             "name": "conf-common",
             "description": "General settings that apply to all configurations",
             "hidden": true,
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}"
+            "binaryDir": "${sourceDir}/build",
+            "installDir": "${sourceDir}/build/install"
         },
         {
             "name": "conf-windows-common",
@@ -33,8 +32,8 @@
                 "strategy": "external"
             },
             "cacheVariables": {
-                "ENABLE_CPPCHECK_DEFAULT": "FALSE",
-                "ENABLE_CLANG_TIDY_DEFAULT": "FALSE"
+                "ENABLE_CPPCHECK_DEFAULT": "TRUE",
+                "ENABLE_CLANG_TIDY_DEFAULT": "TRUE"
             }
         },
         {
