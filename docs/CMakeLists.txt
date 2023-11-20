@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14...3.22)
 
 # Set the project name and language
-project(faang_docs)
+project(myproject_docs)
 
 # ---- Dependencies ----
 
@@ -11,7 +11,7 @@ find_package(Doxygen 1.9.4 REQUIRED OPTIONAL_COMPONENTS dot)
 
 if(Doxygen_FOUND)
 # set Doxyfile variables
-set(DOXYGEN_PROJECT_NAME faang_docs)
+set(DOXYGEN_PROJECT_NAME myproject_docs)
 set(DOXYGEN_PROJECT_VERSION 0.0.1.1)
 set(DOXYGEN_PROJECT_DESCRIPTION "")
 set(DOXYGEN_PROJECT_ROOT "${CMAKE_CURRENT_LIST_DIR}/..")
