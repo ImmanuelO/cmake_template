@@ -37,6 +37,8 @@ myproject_setup_dependencies()
 
 myproject_local_options()
 
+option(BUILD_DOCS "Build and Install Documents (Requires Doxygen)") 
+
 # don't know if this should be set globally from here or not...
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
@@ -102,6 +104,17 @@ endif()
 
 # set the startup project for the "play" button in MSVC
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT intro)
+
+# Use cmake option BUILD_DOCS to build the documents
+if (BUILD_DOCS)
+  #only build docs when asked
+  find_package(Doxygen)
+  if(DOXYGEN_FOUND)
+    add_subdirectory(docs)
+  else()
+    message(NOTICE "Doxygen executable not installed")
+  endif()
+endif()
 
 if(CMAKE_SKIP_INSTALL_RULES)
   return()
