@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.15...3.23)
 project(CmakeConfigPackageTests LANGUAGES CXX)
 
 # ---- Test as standalone project the exported config package ----
-
 if(PROJECT_IS_TOP_LEVEL OR TEST_INSTALLED_VERSION)
   enable_testing()
 
@@ -33,9 +32,9 @@ add_executable(tests tests.cpp)
 target_link_libraries(
   tests
   PRIVATE myproject::myproject_warnings
-          myproject::myproject_options
-          myproject::sample_library
-          Catch2::Catch2WithMain)
+  myproject::myproject_options
+  myproject::sample_library
+  Catch2::Catch2WithMain)
 
 if(WIN32 AND BUILD_SHARED_LIBS)
   add_custom_command(
@@ -65,9 +64,9 @@ add_executable(constexpr_tests constexpr_tests.cpp)
 target_link_libraries(
   constexpr_tests
   PRIVATE myproject::myproject_warnings
-          myproject::myproject_options
-          myproject::sample_library
-          Catch2::Catch2WithMain)
+  myproject::myproject_options
+  myproject::sample_library
+  Catch2::Catch2WithMain)
 
 catch_discover_tests(
   constexpr_tests
@@ -87,10 +86,11 @@ catch_discover_tests(
 add_executable(relaxed_constexpr_tests constexpr_tests.cpp)
 target_link_libraries(
   relaxed_constexpr_tests
-  PRIVATE myproject::myproject_warnings
-          myproject::myproject_options
-          myproject::sample_library
-          Catch2::Catch2WithMain)
+  PRIVATE
+  myproject::myproject_warnings
+  myproject::myproject_options
+  myproject::sample_library
+  Catch2::Catch2WithMain)
 target_compile_definitions(relaxed_constexpr_tests PRIVATE -DCATCH_CONFIG_RUNTIME_STATIC_REQUIRE)
 
 catch_discover_tests(

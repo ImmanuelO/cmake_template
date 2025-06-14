@@ -20,11 +20,11 @@
 
 template<std::size_t Width, std::size_t Height> struct GameBoard
 {
-  static constexpr std::size_t width = Width;
+  static constexpr std::size_t width  = Width;
   static constexpr std::size_t height = Height;
 
   std::array<std::array<std::string, height>, width> strings;
-  std::array<std::array<bool, height>, width> values{};
+  std::array<std::array<bool, height>, width>        values{};
 
   std::size_t move_count{ 0 };
 
@@ -141,7 +141,7 @@ void consequence_game()
 
 
   static constexpr int randomization_iterations = 100;
-  static constexpr int random_seed = 42;
+  static constexpr int random_seed              = 42;
 
   std::mt19937 gen32{ random_seed };// NOLINT fixed seed
 
@@ -190,12 +190,12 @@ struct Bitmap : ftxui::Node
   {
     for (std::size_t cur_x = 0; cur_x < width_; ++cur_x) {
       for (std::size_t cur_y = 0; cur_y < height_ / 2; ++cur_y) {
-        auto &pixel = screen.PixelAt(box_.x_min + static_cast<int>(cur_x), box_.y_min + static_cast<int>(cur_y));
+        auto &pixel     = screen.PixelAt(box_.x_min + static_cast<int>(cur_x), box_.y_min + static_cast<int>(cur_y));
         pixel.character = "▄";
-        const auto &top_color = at(cur_x, cur_y * 2);
+        const auto &top_color    = at(cur_x, cur_y * 2);
         const auto &bottom_color = at(cur_x, cur_y * 2 + 1);
-        pixel.background_color = ftxui::Color{ top_color.R, top_color.G, top_color.B };
-        pixel.foreground_color = ftxui::Color{ bottom_color.R, bottom_color.G, bottom_color.B };
+        pixel.background_color   = ftxui::Color{ top_color.R, top_color.G, top_color.B };
+        pixel.foreground_color   = ftxui::Color{ bottom_color.R, bottom_color.G, bottom_color.B };
       }
     }
   }
@@ -217,7 +217,7 @@ void game_iteration_canvas()
 {
   // this should probably have a `bitmap` helper function that does what cur_you expect
   // similar to the other parts of FTXUI
-  auto bm = std::make_shared<Bitmap>(50, 50);// NOLINT magic numbers
+  auto bm       = std::make_shared<Bitmap>(25, 25);// NOLINT magic numbers
   auto small_bm = std::make_shared<Bitmap>(6, 6);// NOLINT magic numbers
 
   double fps = 0;
@@ -320,11 +320,11 @@ int main(int argc, const char **argv)
     bool show_version = false;
     app.add_flag("--version", show_version, "Show version information");
 
-    bool is_turn_based = false;
-    auto *turn_based = app.add_flag("--turn_based", is_turn_based);
+    bool  is_turn_based = false;
+    auto *turn_based    = app.add_flag("--turn_based", is_turn_based);
 
-    bool is_loop_based = false;
-    auto *loop_based = app.add_flag("--loop_based", is_loop_based);
+    bool  is_loop_based = false;
+    auto *loop_based    = app.add_flag("--loop_based", is_loop_based);
 
     turn_based->excludes(loop_based);
     loop_based->excludes(turn_based);

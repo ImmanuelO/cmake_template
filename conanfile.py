@@ -14,9 +14,9 @@ class MyProjectConan(ConanFile):
         """ determine how various parts of a 
         dependency are treated and propagated 
         by Conan """
-        self.requires("fmt/10.1.1")
-        self.requires("spdlog/1.12.0")
-        self.requires("catch2/3.3.2")
-        self.requires("cli11/2.3.2")
+        self.requires("fmt/10.2.1")
+        self.requires("spdlog/1.14.1")
+        self.requires("catch2/3.7.1")
+        self.requires("cli11/2.4.2")
         self.requires("ftxui/5.0.0")
-        
+        self.requires("nanobench/4.3.11")
