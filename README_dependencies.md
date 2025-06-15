@@ -145,6 +145,25 @@ The following compilers should work:
 	</details>
 
 
+  * [Sphinxx + breathe](https://www.breathe-doc.org/)
+	<details>
+	<summary>Install Command</summary>
+
+	- Debian/Ubuntu:
+
+			sudo apt install python3-sphinx python3-breathe
+
+	- Windows:
+
+			choco install sphinx
+
+	- MacOS:
+
+			brew install sphinx-doc
+
+	</details>
+
+
   * [ccache](https://ccache.dev/)
 	<details>
 	<summary>Install Command</summary>

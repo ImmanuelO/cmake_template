@@ -5,6 +5,7 @@ project(myproject_docs)
 
 # ---- Dependencies ----
 find_package(Doxygen 1.9.4 REQUIRED OPTIONAL_COMPONENTS dot)
+find_program(SPHINX_EXECUTABLE sphinx-build)
 
 # ---- Doxygen variables ----
 if(Doxygen_FOUND)
@@ -28,4 +29,25 @@ if(Doxygen_FOUND)
   )
 else()
   message(FATAL_ERROR "Doxygen executable not installed")
+endif()
+
+# ---- Sphinx Variables ----
+if(SPHINX_EXECUTABLE)
+  set(SPHINX_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/sphinx/source")
+  if(NOT EXISTS ${SPHINX_SOURCE})
+    message(FATAL_ERROR "Sphinx source directory does not exist: ${SPHINX_SOURCE}")
+  endif()
+  # Ensure the build directory exists
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/sphinx/build)
+  # Set the Sphinx build directory
+  set(SPHINX_BUILD  "${CMAKE_CURRENT_BINARY_DIR}/sphinx/build")
+
+  add_custom_target(GenerateSphinxDocs
+    COMMAND ${SPHINX_EXECUTABLE} -b html ${SPHINX_SOURCE} ${SPHINX_BUILD}
+    COMMENT "Generating Sphinx documentation"
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    DEPENDS GenerateDoxygenDocs
+  )
+else()
+  message(WARNING "Sphinx executable not found. Skipping Sphinx docs.")
 endif()
