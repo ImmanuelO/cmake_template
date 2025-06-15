@@ -4,10 +4,8 @@ include(cmake/CPM.cmake)
 # CMAKE_CXX_FLAGS don't propagate out to other
 # targets
 function(myproject_setup_dependencies)
-
   # For each dependency, see if it's
   # already been provided to us by a parent project
-
   if(NOT TARGET fmtlib::fmtlib)
     CPMFindPackage(
       NAME fmt

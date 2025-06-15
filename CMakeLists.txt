@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.21)
 # manual dependency management
 
 # Only set the cxx_standard if it is not set by someone else
-if (NOT DEFINED CMAKE_CXX_STANDARD)
+if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 20)
 endif()
 
@@ -28,7 +28,6 @@ project(
 include(cmake/PreventInSourceBuilds.cmake)
 include(ProjectOptions.cmake)
 
-
 myproject_setup_options()
 
 myproject_global_options()
@@ -37,27 +36,27 @@ myproject_setup_dependencies()
 
 myproject_local_options()
 
-option(BUILD_DOCS "Build and Install Documents (Requires Doxygen)") 
+option(BUILD_DOCS "Build and Install Documents (Requires Doxygen)")
 
 # don't know if this should be set globally from here or not...
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(GIT_SHA
-    "Unknown"
-    CACHE STRING "SHA this build was generated from")
+  "Unknown"
+  CACHE STRING "SHA this build was generated from")
 string(
   SUBSTRING "${GIT_SHA}"
-            0
-            8
-            GIT_SHORT_SHA)
+  0
+  8
+  GIT_SHORT_SHA)
 
 target_compile_features(myproject_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
 
 add_library(myproject::myproject_options ALIAS myproject_options)
 add_library(myproject::myproject_warnings ALIAS myproject_warnings)
 
-#add_library(myproject::myproject_options INTERFACE IMPORTED)
-#add_library(myproject::myproject_warnings INTERFACE IMPORTED)
+# add_library(myproject::myproject_options INTERFACE IMPORTED)
+# add_library(myproject::myproject_warnings INTERFACE IMPORTED)
 
 # configure files based on CMake configuration options
 add_subdirectory(config)
@@ -78,14 +77,14 @@ if(BUILD_TESTING)
   add_subdirectory(test)
 endif()
 
-
 if(myproject_BUILD_FUZZ_TESTS)
   message(AUTHOR_WARNING "Building Fuzz Tests, using fuzzing sanitizer https://www.llvm.org/docs/LibFuzzer.html")
-  if (NOT myproject_ENABLE_ADDRESS_SANITIZER AND NOT myproject_ENABLE_THREAD_SANITIZER)
+
+  if(NOT myproject_ENABLE_SANITIZER_ADDRESS AND NOT myproject_ENABLE_SANITIZER_THREAD)
     message(WARNING "You need asan or tsan enabled for meaningful fuzz testing")
   endif()
-  add_subdirectory(fuzzing)
 
+  add_subdirectory(fuzzing)
 endif()
 
 # If MSVC is being used, and ASAN is enabled, we need to set the debugger environment
@@ -93,9 +92,9 @@ endif()
 if(MSVC)
   get_all_installable_targets(all_targets)
   message("all_targets=${all_targets}")
-  set_target_properties(${all_targets} 
-    PROPERTIES 
-    VS_DEBUGGER_ENVIRONMENT 
+  set_target_properties(${all_targets}
+    PROPERTIES
+    VS_DEBUGGER_ENVIRONMENT
     "PATH=$(VC_ExecutablePath_x64);%PATH%"
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
@@ -106,9 +105,10 @@ endif()
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT intro)
 
 # Use cmake option BUILD_DOCS to build the documents
-if (BUILD_DOCS)
-  #only build docs when asked
+if(BUILD_DOCS)
+  # only build docs when asked
   find_package(Doxygen)
+
   if(DOXYGEN_FOUND)
     add_subdirectory(docs)
   else()
@@ -129,6 +129,7 @@ myproject_package_project(
   intro
   myproject_options
   myproject_warnings
+
   # FIXME: this does not work! CK
   # PRIVATE_DEPENDENCIES_CONFIGURED project_options project_warnings
 )
@@ -137,7 +138,7 @@ myproject_package_project(
 # out potential ABI related issues before they start, while helping you
 # track a build to a specific GIT SHA
 set(CPACK_PACKAGE_FILE_NAME
-    "${CMAKE_PROJECT_NAME}-${CMAKE_PROJECT_VERSION}-${GIT_SHORT_SHA}-${CMAKE_SYSTEM_NAME}-${CMAKE_BUILD_TYPE}-${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}"
+  "${CMAKE_PROJECT_NAME}-${CMAKE_PROJECT_VERSION}-${GIT_SHORT_SHA}-${CMAKE_SYSTEM_NAME}-${CMAKE_BUILD_TYPE}-${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}"
 )
 
 include(CPack)
