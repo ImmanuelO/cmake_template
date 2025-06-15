@@ -1,20 +1,38 @@
-.. myproject documentation master file, created by
-   sphinx-quickstart on Sun Jun 15 14:48:50 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+cmake_template Documentation
+============================
 
-Welcome to myproject's documentation!
-=====================================
+Welcome to the documentation for **cmake_template**, a C++ Best Practices GitHub template for fast and structured development.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: 📖 Contents
 
+   about
+   installation
+   usage
+   dependencies
+   building
+   docker
+   testing
+   fuzz_testing
+   contributing
 
+About cmake_template
+---------------------
+**cmake_template** is designed to help developers quickly set up **modern C++ projects** with best practices.  
+It includes:
+- **Developer Mode** (Address Sanitizer, Undefined Behavior Sanitizer, warnings as errors)
+- **Static Analysis** (clang-tidy, cppcheck)
+- **Dependency Management** via CPM
+- **Preconfigured Testing & CI**
+- **Integration with FTXUI** for CLI applications
 
-Indices and tables
-==================
+For a detailed overview, see :doc:`about`.
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+Getting Started
+---------------
+1. **Use the GitHub template** → Follow [GitHub’s guide](https://github.com/cpp-best-practices/cmake_template/generate)
+2. **Clone your project**:
+   ```bash
+   git clone https://github.com/<user>/<your_new_repo>.git
+   cd <your_new_repo>
