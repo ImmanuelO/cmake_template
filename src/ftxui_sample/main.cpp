@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <cstdlib>
 #include <exception>
-#include <fmt/base.h>
+// #include <fmt/base.h>
 #include <fmt/format.h>
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/dom/node.hpp>
@@ -272,7 +272,8 @@ void game_iteration_canvas()
       small_bm_pixel.B += 11;// NOLINT Magic Number
       break;
     default:// literally impossible
-      std::unreachable();
+      // std::unreachable();
+      break;
     }
 
 

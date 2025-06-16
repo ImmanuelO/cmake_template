@@ -21,7 +21,7 @@ if(Doxygen_FOUND)
   configure_file(${doxyfile_in} ${doxyfile} @ONLY)
 
   add_custom_target(
-    GenerateDocs
+    GenerateDoxygenDocs
     ${CMAKE_COMMAND} -E make_directory "${DOXYGEN_OUTPUT_DIRECTORY}"
     COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile}
     COMMAND echo "Docs written to: \"${DOXYGEN_OUTPUT_DIRECTORY}/html/index.html\""

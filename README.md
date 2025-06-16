@@ -49,9 +49,9 @@ Now you can clone the project locally and get to work!
 
 ## More Details
 
- * [Dependency Setup](README_dependencies.md)
- * [Building Details](README_building.md)
- * [Docker](README_docker.md)
+ * [Dependency Setup](docs/sphinx/source/dependencies.rst)
+ * [Building Details](docs/sphinx/source/building.rst)
+ * [Docker](docs/sphinx/source/docker.rst)
 
 ## Testing
 
