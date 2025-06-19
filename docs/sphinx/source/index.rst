@@ -6,11 +6,9 @@ Welcome to the documentation for a C++ Best Practices GitHub template for fast a
 For a detailed overview, see :doc:`about`.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :caption: 📚 Table of Contents
 
    about
-   dependencies
    building
    testing
-   docker
-   contributing

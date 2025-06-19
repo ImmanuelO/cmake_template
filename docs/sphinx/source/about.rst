@@ -24,4 +24,15 @@ Getting Started
       git clone https://github.com/<user>/<your_new_repo>.git
       cd <your_new_repo>
 
+Other
+---------------
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   dependencies
+   contributing
+   
+
 For more information on contributing to the project, see :doc:`contributing`.

@@ -7,6 +7,13 @@ A full build consists of the following steps:
 2. **Configure the project** using CMake. 
 3. **Build the project** to generate executables. 
 
+
+.. toctree::
+   :maxdepth: 1
+
+   docker
+
+
 For subsequent builds (after changing the source code), only **Step 3** needs to be repeated.
 
 Specifying the Compiler
